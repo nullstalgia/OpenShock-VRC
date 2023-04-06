@@ -1,0 +1,75 @@
+{
+    "OpenShock": {
+        "host": "192.168.86.78",
+        "port": 8080,
+        "RetryCount": 10,
+        "ids": ["LUL", "LUA"]
+    },
+    "osc": {
+        "SendingPort": 9000,
+        "ListeningPort": 9001,
+        "host": "127.0.0.1",
+        "parameterPrefix": "/avatar/parameters/",
+        "touchpointTimeout": 10,
+        "unmuteOnTouch": true,
+        "touchpoints": [
+            {
+               "address": "NoseBoop", 
+               "method": 1,
+               "intensity": 0.8,
+               "duration": 300,
+               "looping": false,
+               "ids": ["LUL", "LUA"]
+            },
+            {
+                "address": "Headpat",
+                "method": 2,
+                "intensity": 0.1,
+                "unmute": false,
+                "ids": ["LUL", "LUA"]
+            },
+            {
+                "address": "ArmZap",
+                "method": 1,
+                "intensity": 0.8,
+                "ids": ["LUA"]
+            },
+            {
+                "address": "LegZap",
+                "method": 1,
+                "intensity": 0.8,
+                "ids": ["LUL"]
+            },
+            {
+                "address": "OpenShock/Panel/Button_25",
+                "method": 1,
+                "intensity": 0.25,
+                "ids": ["LUL", "LUA"]
+            },
+            {
+                "address": "OpenShock/Panel/Button_50",
+                "method": 1,
+                "intensity": 0.50,
+                "ids": ["LUL", "LUA"]
+            },
+            {
+                "address": "OpenShock/Panel/Button_75",
+                "method": 1,
+                "intensity": 0.75,
+                "ids": ["LUL", "LUA"]
+            },
+            {
+                "address": "OpenShock/Panel/Button_100",
+                "method": 1,
+                "intensity": 1,
+                "ids": ["LUL", "LUA"]
+            },
+            {
+                "address": "OpenShock/Panel/Intensity_Stretch",
+                "method": 1,
+                "intensity": 1,
+                "ids": ["LUL", "LUA"]
+            }
+        ]
+    }
+}
