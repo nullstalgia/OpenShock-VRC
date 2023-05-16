@@ -213,8 +213,6 @@ async def init_main():
                     dispatcher.map("/avatar/parameters/OpenShock/Intensity", touchPointActions.setIntensity)
                     dispatcher.map("/avatar/parameters/AFK", touchPointActions.setAFK)
                     dispatcher.map("/avatar/parameters/OpenShock/TouchDisable", touchPointActions.setTouchDisabled)
-                    dispatcher.map(f"{config['osc']['parameterPrefix']}{config['osc']['panelIntensity']}", touchPointActions.setPanelIntensity)
-                    dispatcher.map(f"{config['osc']['parameterPrefix']}{config['osc']['panelIntensityEnable']}", touchPointActions.setPanelIntensityEnabled)
 
                     dispatcher.map("/avatar/parameters/VRCEmote", touchPointActions.setVRCEmote)
 

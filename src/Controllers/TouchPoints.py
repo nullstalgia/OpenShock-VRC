@@ -17,6 +17,7 @@ class TouchPoint:
         self.method = method
         self.duration = duration
         self.timeout = timeout
+        self.mostRecentAction = None
         self.lastActiveTime = 0
         self.state = IDLE
         self.ids = ids
@@ -58,8 +59,6 @@ class TouchPointActions:
         self.config = config
         self.prefix = config['osc']['parameterPrefix']
         self.multiplier = .1
-        self.panelMultiplier = 0
-        self.panelMultiplierActive = False
         self.outputMultiplier = .1
         self.touchpoints = {} # dict of TouchPoints
         self.memoryOut = MemoryOut
@@ -110,20 +109,19 @@ class TouchPointActions:
             await sleep(0.05)
             self.client.send_message("/input/Voice",0)
         
-
     async def touch(self, address: str, activate: float|bool):
-        if activate:
-            try:
-                await self.tryUnmute(address)
-            except TypeError:
-                # Throttled function returned None
-                pass
         if address in self.touchpoints.keys():
+            touchpoint = self.touchpoints[address]
             if not await self.afkCheck():
-                await self.sendAction(self.touchpoints[address].sendAction(activate))
+                touchpoint.mostRecentAction = touchpoint.sendAction(activate)
+                if activate:
+                    try:
+                        await self.tryUnmute(address)
+                    except TypeError:
+                        # Throttled function returned None
+                        pass
         else:
             print(f"Touchpoint {address} not found in config")
-                
 
     def addTouchpoint(self, address: str, ids: list, intensity: float, method: int, duration: int, timeout: int, looping: bool, shouldUnmute: bool):
         self.touchpoints[address] = TouchPoint(address, ids, intensity, method, duration, timeout, looping, shouldUnmute)
@@ -133,7 +131,7 @@ class TouchPointActions:
 
     async def setIntensity(self, address: str, intensity: float):
         self.multiplier = intensity
-        await self.processOutputMultiplier()
+        self.outputMultiplier = intensity
 
     async def muteStatus(self, address: str, mute: bool):
         self.isMuted = mute
@@ -146,6 +144,10 @@ class TouchPointActions:
             # Loop through current active touchpoints and re-send their action
             # If it's been longer than the timeout, send an action with intensity 0
             for touchpoint in self.touchpoints.values():
+                if touchpoint.mostRecentAction != None:
+                    await self.sendAction(touchpoint.mostRecentAction)
+                    touchpoint.mostRecentAction = None
+                    
                 if touchpoint.lastIntensity > 0 and touchpoint.looping:
                     if time.time() - touchpoint.lastActiveTime > touchpoint.timeout:
                         await self.sendAction(touchpoint.sendAction(0))
@@ -172,19 +174,3 @@ class TouchPointActions:
 
     async def setTouchDisabled(self, address: str, value: bool):
         self.touchDisabled = value
-    
-    async def processOutputMultiplier(self):
-        if self.panelMultiplierActive:
-            self.outputMultiplier = self.multiplier * self.panelMultiplier
-        else:
-            self.outputMultiplier = self.multiplier
-
-    async def setPanelIntensity(self, address: str, value: float):
-        self.panelMultiplier = value
-        print(f"Panel multiplier set to {value}")
-        await self.processOutputMultiplier()
-
-    async def setPanelIntensityEnabled(self, address: str, value: bool):
-        self.panelMultiplierActive = value
-        await self.processOutputMultiplier()
-        
