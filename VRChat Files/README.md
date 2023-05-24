@@ -44,8 +44,11 @@ With Touchpoints, you are able to set up any arbitrary VRC Contact Reciever to s
 - Set up the companion script supplied in this repo. If you are connecting to a local unit on your network, you should be able to leave the "host" at the default "openshock.local" value. In the event that it can not find the local device, you can set the IP of the unit manually.
 - Import the dependencies into your project
 - Find the Touchpoint Control prefab in the OpenShock folder and place it on the root of your avatar's hierarchy. This will let you set the intensity of and temporarily disable your touchpoints.
-- Set up Recievers on your avatar, and note their parameter names (address).
-- Add additional touchpoint JSON objects into the config as needed.
+- Set up [Recievers](https://www.youtube.com/watch?v=LOZu6e8ozns) on your avatar, and note their parameter names (address).
+- Add additional touchpoint JSON objects into the config as needed. Don't forget the comma between each object! 
+
+You can ensure your JSON is valid by pasting it into [json.wtf](http://json.wtf/) and clicking the Thumbs Up ( 👍 ) button on the top right.
+
 
 ### JSON Touchpoint Format:
 
