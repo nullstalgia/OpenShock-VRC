@@ -1,16 +1,16 @@
 {
     "OpenShock": {
-        "host": "192.168.86.78",
+        "host": "openshock.local",
         "port": 8080,
         "RetryCount": 10,
-        "ids": ["LUL", "LUA"]
+        "ids": ["LUL", "LUA", "C1", 4032]
     },
     "osc": {
         "SendingPort": 9000,
         "ListeningPort": 9001,
         "host": "127.0.0.1",
         "parameterPrefix": "/avatar/parameters/",
-        "touchpointTimeout": 10,
+        "touchpointTimeout": 15,
         "unmuteOnTouch": true,
         "touchpoints": [
             {

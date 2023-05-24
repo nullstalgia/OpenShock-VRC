@@ -66,4 +66,9 @@ With Touchpoints, you are able to set up any arbitrary VRC Contact Reciever to s
 #### Acknowledgements:
 
 - Panel modelled by: amtcubus
-- [VRLabs World Constraint](https://github.com/VRLabs/World-Constraint) (included in unitypackage)
+- [VRLabs World Constraint](https://github.com/VRLabs/World-Constraint) (included in .unitypackage)
+
+#### Changelog:
+
+- 1.0 - Initial Release
+- 1.1 - Fixed Lightning Bolt clipping when panel squished
