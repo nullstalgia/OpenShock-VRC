@@ -169,6 +169,8 @@ async def openshock(worker_send: trio.MemorySendChannel, worker_receive: trio.Me
 
 
 async def init_main():
+    # colorama init
+    init()
     # Read config file (VRCControl.json) if it exists
 
     if os.path.exists(application_path+'/VRCControl.json'):
